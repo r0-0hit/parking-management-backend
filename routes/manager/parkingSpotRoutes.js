@@ -2,7 +2,7 @@ const express = require('express')
 const { verifyToken, isManager } = require('../../middleware/authMiddleware')
 const ParkingSpot = require('../../models/ParkingSpot')
 const Manager = require('../../models/Manager')
-const getLatLng = require('../../util/getlatLng')
+const getLatLng = require('../../util/getLatLng')
 
 const router = express.Router()
 
