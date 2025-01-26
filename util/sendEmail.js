@@ -37,10 +37,14 @@ const sendEmailNotification = (userEmail, context, info) => {
 			} has been confirmed.\n
             ---INFO---\n
             Slot Name: ${info.parking_spot_id.name}\n
-            Date: ${new Date(info.booking_date).toLocaleDateString()}\n
-            Time: ${new Date(info.start_time).toLocaleTimeString()} - ${new Date(
-				info.end_time
-			).toLocaleTimeString()}\n
+            Date: ${new Date(info.booking_date).toLocaleDateString('en-IN', {
+				timeZone: 'Asia/Kolkata',
+			})}\n
+            Time: ${new Date(info.start_time).toLocaleTimeString('en-IN', {
+				timeZone: 'Asia/Kolkata',
+			})} - ${new Date(info.end_time).toLocaleTimeString('en-IN', {
+				timeZone: 'Asia/Kolkata',
+			})}\n
             Amount: ${info.total_cost}\n
             Status: ${info.status}\n
             Transaction ID: ${info.transactionId}`
@@ -52,10 +56,14 @@ const sendEmailNotification = (userEmail, context, info) => {
 			} has been rejected.\n
             ---INFO---\n
             Slot Name: ${info.parking_spot_id.name}\n
-            Date: ${new Date(info.booking_date).toLocaleDateString()}\n
-            Time: ${new Date(info.start_time).toLocaleTimeString()} - ${new Date(
-				info.end_time
-			).toLocaleTimeString()}\n
+            Date: ${new Date(info.booking_date).toLocaleDateString('en-IN', {
+				timeZone: 'Asia/Kolkata',
+			})}\n
+            Time: ${new Date(info.start_time).toLocaleTimeString('en-IN', {
+				timeZone: 'Asia/Kolkata',
+			})} - ${new Date(info.end_time).toLocaleTimeString('en-IN', {
+				timeZone: 'Asia/Kolkata',
+			})}\n
             `
 			break
 	}
