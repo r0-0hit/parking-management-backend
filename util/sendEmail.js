@@ -52,8 +52,8 @@ const sendEmailNotification = (userEmail, context, info) => {
 			} has been rejected.\n
             ---INFO---\n
             Slot Name: ${info.parking_spot_id.name}\n
-            Date: ${Date(info.booking_date).toLocaleDateString()}\n
-            Time: ${Date(info.start_time).toLocaleTimeString()} - ${Date(
+            Date: ${new Date(info.booking_date).toLocaleDateString()}\n
+            Time: ${new Date(info.start_time).toLocaleTimeString()} - ${new Date(
 				info.end_time
 			).toLocaleTimeString()}\n
             `
