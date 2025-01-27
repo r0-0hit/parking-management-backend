@@ -25,4 +25,13 @@ const isManager = (req, res, next) => {
 	}
 }
 
-module.exports = { verifyToken, isManager }
+// for admin 
+const isAdmin = (req, res, next) => {
+	if (req.user && req.user.role === 'admin') {
+		next()
+	} else {
+		res.status(403).json({ message: 'Access Denied : Admin Only' })
+	}
+}
+
+module.exports = { verifyToken, isManager, isAdmin }
