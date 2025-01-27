@@ -1,5 +1,5 @@
-const Manager = require('./models/Manager');
-const ParkingSpot = require('./models/ParkingSpot');
+const Manager = require('../models/Manager');
+const ParkingSpot = require('../models/ParkingSpot');
 
 // Get managers with their parking spots
 const getManagers = async (req, res) => {

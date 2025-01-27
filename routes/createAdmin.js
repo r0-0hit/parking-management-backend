@@ -2,9 +2,10 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const Admin = require('../models/Admin');
 const router = express.Router();
+const { isAdmin } = require('../middleware/authMiddleware')
 
 // Route to create a new admin
-router.post('/', async (req, res) => {
+router.post('/', isAdmin, async (req, res) => {
     try {
         const { email, password } = req.body;
 

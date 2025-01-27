@@ -18,7 +18,7 @@ app.use('/api/auth', require('./routes/auth'))
 app.use('/api/users', require('./routes/users'))
 app.use('/api/managers', require('./routes/managers'))
 app.use('/api/available-spots', require('./routes/findAvalibleSpots'))
-app.use('api/create-admin', require('./routes/createAdmin'))
+app.use('/api/create-admin', require('./routes/createAdmin'))
 
 //payment route
 app.use('/api/payment', require('./routes/payment'))
