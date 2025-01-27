@@ -5,7 +5,7 @@ const connectDB = require('./config/db')
 const cors = require('cors')
 const app = express()
 // import routes
-//change from ROHIT
+
 
 app.use(cors())
 connectDB()
