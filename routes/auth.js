@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const Manager = require('../models/Manager');
+const Admin = require('../models/Admin');
 
 const router = express.Router();
 
@@ -22,10 +23,20 @@ router.post('/login', async (req, res) => {
             return res.json({ token, role: 'manager', data: manager });
         }
 
+        // Check Admin
+        const admin = await Admin.findOne({ email });
+        if (admin && bcrypt.compareSync(password, admin.password)) {
+            const token = jwt.sign({ id: admin._id, role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            return res.json({ token, role: 'admin', data: admin });
+        }
+
+
         res.status(401).json({ message: 'Invalid email or password' });
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+
 
 module.exports = router;
