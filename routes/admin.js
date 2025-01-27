@@ -45,4 +45,5 @@ const removeManager = async (req, res) => {
     }
 };
 
+
 module.exports = { getManagers, removeManager };
