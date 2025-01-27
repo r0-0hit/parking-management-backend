@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
+    // console.log(email, password)
 
     try {
         let user = await User.findOne({ email });
@@ -25,6 +26,7 @@ router.post('/login', async (req, res) => {
 
         // Check Admin
         const admin = await Admin.findOne({ email });
+        // console.log(admin)
         if (admin && bcrypt.compareSync(password, admin.password)) {
             const token = jwt.sign({ id: admin._id, role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '1h' });
             return res.json({ token, role: 'admin', data: admin });
