@@ -11,6 +11,20 @@ router.get('/', async (req, res) => {
 	try {
 		const { location, start, end, date, lat, lng } = req.query
 
+		const normalizeLocation = location => location.toLowerCase().trim().replace(/\s+/g, ' ')
+
+		const userLocation = normalizeLocation(location)
+
+		async function createTextIndex() {
+			try {
+				await ParkingSpot.collection.createIndex({ location: 'text' })
+			} catch (err) {
+				console.error('Error creating text index:', err)
+			}
+		}
+
+		createTextIndex()
+
 		// Validate input parameters
 		if (!location || !start || !end || !date) {
 			return res.status(400).json({ message: 'Missing required parameters' })
@@ -46,8 +60,6 @@ router.get('/', async (req, res) => {
 		let availableSpots
 
 		if (location === 'Your Current Location') {
-			console.log(lat, lng)
-
 			if (!lat || !lng) {
 				return res.status(400).json({
 					message: 'Latitude and longitude are required for "Near Me" search',
@@ -68,9 +80,13 @@ router.get('/', async (req, res) => {
 		} else {
 			// Query available parking spots based on the location
 			availableSpots = await ParkingSpot.find({
-				location: { $regex: location, $options: 'i' },
+				$text: { $search: userLocation },
 				_id: { $nin: bookedSpotIds },
 			})
+			// availableSpots = await ParkingSpot.find({
+			// 	location: { $regex: location, $options: 'i' },
+			// 	_id: { $nin: bookedSpotIds },
+			// })
 		}
 
 		// Return available parking spots
