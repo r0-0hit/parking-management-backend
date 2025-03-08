@@ -72,7 +72,7 @@ router.get('/', async (req, res) => {
 			})
 
 			// Filter spots within a 5 km radius
-			const radiusInKm = 5
+			const radiusInKm = 10
 			availableSpots = allSpots.filter(spot => {
 				const distance = getDistance(lat, lng, spot.latitude, spot.longitude)
 				return distance <= radiusInKm
